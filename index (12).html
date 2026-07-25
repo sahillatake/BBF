@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BFF — Brooklyn Food Factory | Dombivli</title>
+<meta name="description" content="Loaded burgers, thick shakes and street-style plates from BFF - Brooklyn Food Factory, Swarajya Business Park, Dombivli East. Open daily 11 AM - 12 AM. Order on WhatsApp.">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="BFF — Brooklyn Food Factory | Dombivli">
+<meta property="og:description" content="Loaded burgers, thick shakes and street-style plates from a factory-floor kitchen in Dombivli East. Open daily 11 AM - 12 AM.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BFF — Brooklyn Food Factory | Dombivli">
+<meta name="twitter:description" content="Loaded burgers, thick shakes and street-style plates. Open daily 11 AM - 12 AM in Dombivli East.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%231d1916'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-weight='900' font-size='52' fill='%23d9a441' text-anchor='middle'%3EBFF%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Big+Shoulders+Stencil:wght@700;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -360,6 +369,32 @@
     outline:3px solid var(--mustard);outline-offset:3px;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "BFF — Brooklyn Food Factory",
+  "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+  "telephone": "+917208878080",
+  "servesCuisine": ["Burgers", "Shakes", "Street Food", "Sandwiches"],
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop No. 4, Swarajya Business Park, Chhatrapati Shivaji Maharaj Circle, Trimurti Nagar",
+    "addressLocality": "Dombivli East",
+    "addressRegion": "Maharashtra",
+    "postalCode": "421203",
+    "addressCountry": "IN"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "11:00",
+    "closes": "23:59"
+  },
+  "sameAs": ["https://wa.me/917208878080"]
+}
+</script>
 </head>
 <body>
 <div class="grain"></div>
@@ -373,7 +408,7 @@
     <a href="#visit">Visit</a>
     <a href="https://wa.me/917208878080" class="nav-order">Order on WhatsApp</a>
   </div>
-  <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
+  <button class="burger" aria-label="menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="hero">
@@ -530,7 +565,7 @@
         Maharashtra – 421203
       </p>
       <div class="contact-line">
-        <a href="https://www.google.com/maps/search/?api=1&query=Swarajya+Business+Park+Chhatrapati+Shivaji+Maharaj+Circle+Dombivli+East" target="_blank" rel="noopener">Get Directions →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=BFF+Brooklyn+Food+Factory+Swarajya+Business+Park+Dombivli+East" target="_blank" rel="noopener">Get Directions →</a>
       </div>
     </div>
   </div>
@@ -553,19 +588,34 @@
 </a>
 
 <script>
-document.querySelector('.burger').addEventListener('click', ()=>{
-  const links = document.querySelector('.nav-links');
-  if(links.style.display==='flex'){links.style.display='none';}
-  else{
-    links.style.display='flex';
-    links.style.position='absolute';
-    links.style.top='72px';links.style.right='6vw';
-    links.style.background='var(--charcoal)';
-    links.style.flexDirection='column';
-    links.style.padding='20px';
-    links.style.gap='16px';
-    links.style.border='2px solid var(--mustard)';
-  }
+const burger = document.querySelector('.burger');
+const navLinks = document.querySelector('.nav-links');
+
+function openMenu(){
+  navLinks.style.display='flex';
+  navLinks.style.position='absolute';
+  navLinks.style.top='72px';navLinks.style.right='6vw';
+  navLinks.style.background='var(--charcoal)';
+  navLinks.style.flexDirection='column';
+  navLinks.style.padding='20px';
+  navLinks.style.gap='16px';
+  navLinks.style.border='2px solid var(--mustard)';
+  burger.setAttribute('aria-expanded','true');
+}
+function closeMenu(){
+  navLinks.style.display='none';
+  burger.setAttribute('aria-expanded','false');
+}
+
+burger.addEventListener('click', ()=>{
+  if(navLinks.style.display==='flex'){closeMenu();}
+  else{openMenu();}
+});
+
+navLinks.querySelectorAll('a').forEach(link=>{
+  link.addEventListener('click', ()=>{
+    if(window.innerWidth<=900){closeMenu();}
+  });
 });
 </script>
 </body>
